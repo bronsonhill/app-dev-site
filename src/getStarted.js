@@ -1,12 +1,26 @@
 const QUESTIONS = [
-  { key: 'objectives', question: 'What’s your core business goal?', example: 'E.g. Increase user retention by 20% in the next quarter' },
-  { key: 'users', question: 'Who are your target users?', example: 'E.g. Small business owners aged 25-40' },
-  { key: 'features', question: 'What are the must-have features?', example: 'E.g. User authentication, analytics dashboard, push notifications' },
-  { key: 'constraints', question: 'Any deadlines, budgets, or other constraints?', example: 'E.g. $10k budget, launch by end of Q3' }
+  {
+    key: 'projectType',
+    question: 'What type of product are you looking to build?',
+    type: 'choice',
+    options: ['Mobile App', 'Web App', 'Website', 'Other']
+  },
+  {
+    key: 'business',
+    question: 'Tell us about your business/idea.',
+    type: 'textarea',
+    example: 'E.g. We help people track their daily habits and improve productivity.'
+  },
+  { key: 'objectives', question: 'What’s your core business goal?', type: 'textarea', example: 'E.g. Increase user retention by 20% in the next quarter' },
+  { key: 'users', question: 'Who are your target users?', type: 'textarea', example: 'E.g. Small business owners aged 25-40' },
+  { key: 'features', question: 'What are the must-have features?', type: 'textarea', example: 'E.g. User authentication, analytics dashboard, push notifications' },
+  { key: 'constraints', question: 'Any deadlines, budgets, or other constraints?', type: 'textarea', example: 'E.g. $10k budget, launch by end of Q3' }
 ];
 
 const SYSTEM_PROMPT = `You are a requirements analyst. Given these Q&A pairs, produce or update a JSON summary according to this schema:
 {
+  "projectType": string,
+  "business": string,
   "objectives": string[],
   "users": string[],
   "features": string[],
@@ -65,31 +79,63 @@ function hidePanel() {
 
 function renderQuestion() {
   const container = document.querySelector('#get-started-panel .get-started-left');
-  const { key, question, example } = QUESTIONS[state.currentIndex];
+  const q = QUESTIONS[state.currentIndex];
+  const { key, question, example, type, options } = q;
   const existing = state.answers[key] || '';
-  container.innerHTML = `
+  // Build the HTML for the current question
+  let html = `
     <p class="mb-4 text-gray-600">Help us understand your idea and needs.</p>
     <h3 class="text-xl font-semibold mb-2">${question}</h3>
-    <textarea id="get-started-answer" rows="4" placeholder="${example}" class="w-full border border-gray-300 p-2 rounded">${existing}</textarea>
-    <div class="flex justify-between mt-4">
-      ${state.currentIndex > 0 ? '<button id="get-started-prev" class="bg-gray-200 text-gray-800 px-4 py-2 rounded">Previous</button>' : '<div></div>'}
-      <button id="get-started-next" class="bg-blue-600 text-white px-4 py-2 rounded">${state.currentIndex < QUESTIONS.length -1 ? 'Next' : 'Finish'}</button>
-    </div>
   `;
-  document.getElementById('get-started-answer').addEventListener('blur', e => {
-    state.answers[key] = e.target.value;
-    updateSummary();
-  });
-  document.getElementById('get-started-next').addEventListener('click', () => {
-    state.answers[key] = document.getElementById('get-started-answer').value;
-    updateSummary();
-    if (state.currentIndex < QUESTIONS.length - 1) {
-      state.currentIndex++;
-      renderQuestion();
-    } else {
-      hidePanel();
-    }
-  });
+  if (type === 'choice') {
+    html += `<div class="grid grid-cols-2 gap-4 mb-4">`;
+    options.forEach(opt => {
+      html += `<button data-value="${opt}" class="js-choice-btn bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300">${opt}</button>`;
+    });
+    html += `</div>
+      <div class="flex justify-between">
+        ${state.currentIndex > 0 ? `<button id="get-started-prev" class="bg-gray-200 text-gray-800 px-4 py-2 rounded">Previous</button>` : `<div></div>`}
+      </div>
+    `;
+  } else {
+    html += `
+      <textarea id="get-started-answer" rows="4" placeholder="${example}" class="w-full border border-gray-300 p-2 rounded">${existing}</textarea>
+      <div class="flex justify-between mt-4">
+        ${state.currentIndex > 0 ? `<button id="get-started-prev" class="bg-gray-200 text-gray-800 px-4 py-2 rounded">Previous</button>` : `<div></div>`}
+        <button id="get-started-next" class="bg-blue-600 text-white px-4 py-2 rounded">${state.currentIndex < QUESTIONS.length - 1 ? 'Next' : 'Finish'}</button>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
+  // Attach handlers
+  if (type === 'choice') {
+    container.querySelectorAll('.js-choice-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const val = e.currentTarget.getAttribute('data-value');
+        state.answers[key] = val;
+        updateSummary();
+        // Next step
+        state.currentIndex++;
+        renderQuestion();
+      });
+    });
+  } else {
+    const textarea = document.getElementById('get-started-answer');
+    textarea.addEventListener('blur', e => {
+      state.answers[key] = e.target.value;
+      updateSummary();
+    });
+    document.getElementById('get-started-next').addEventListener('click', () => {
+      state.answers[key] = textarea.value;
+      updateSummary();
+      if (state.currentIndex < QUESTIONS.length - 1) {
+        state.currentIndex++;
+        renderQuestion();
+      } else {
+        hidePanel();
+      }
+    });
+  }
   if (state.currentIndex > 0) {
     document.getElementById('get-started-prev').addEventListener('click', () => {
       state.currentIndex--;
