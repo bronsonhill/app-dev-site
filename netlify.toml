@@ -1,3 +1,10 @@
 [build]
   command = "npm run build"
   publish = "dist"
+  
+[dev]
+  # Local development server configuration
+  # Runs Vite and proxies Netlify Functions
+  framework   = "vite"
+  targetPort  = 5173
+  functions   = "netlify/functions"

@@ -17,11 +17,16 @@ npm install
 
 ### Development
 
+To start the Vite development server:
 ```bash
 npm run dev
 ```
-
 Open http://localhost:5173 to view.
+
+To start the Netlify Dev server (includes Netlify Functions proxy):
+```bash
+npm start
+```
 
 ### Build
 
