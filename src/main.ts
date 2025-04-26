@@ -1,7 +1,7 @@
 import './style.css';
-import { initGetStarted } from './getStarted.js';
+import { initGetStarted } from './getStarted';
 
-console.log('main.js loaded');
+console.log('main.ts loaded');
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOMContentLoaded fired: initializing UI components');
   initGetStarted();
