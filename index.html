@@ -37,19 +37,19 @@
       <h2 class="text-4xl font-bold text-center mb-12">Your Project</h2>
       <p class="text-center text-gray-700 mb-8">We build all kinds of digital products to bring your ideas to life.</p>
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+        <div class="js-tile bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl cursor-pointer" data-type="Web Pages">
           <div class="text-blue-600 text-3xl font-bold mb-2">Web Pages</div>
           <p class="text-gray-600">Custom, modern and tailored websites.</p>
         </div>
-        <div class="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+        <div class="js-tile bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl cursor-pointer" data-type="Mobile Apps">
           <div class="text-blue-600 text-3xl font-bold mb-2">Mobile Apps</div>
           <p class="text-gray-600">iOS & Android apps.</p>
         </div>
-        <div class="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+        <div class="js-tile bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl cursor-pointer" data-type="Web Apps">
           <div class="text-blue-600 text-3xl font-bold mb-2">Web Apps</div>
           <p class="text-gray-600">Full-featured web apps for business or personal needs.</p>
         </div>
-        <div class="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+        <div class="js-tile bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl cursor-pointer" data-type="Custom Integrations">
           <div class="text-blue-600 text-3xl font-bold mb-2">Custom Integrations</div>
           <p class="text-gray-600">APIs, chatbots & more.</p>
         </div>
@@ -66,25 +66,25 @@
     <div class="container mx-auto px-6">
       <h2 class="text-4xl font-bold text-center mb-12">Our 4-Step Process</h2>
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+        <div class="js-step bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl cursor-pointer" data-step="Get Started">
           <div class="text-blue-600 text-3xl font-bold mb-2">1</div>
           <h3 class="text-2xl font-semibold mb-2">Get Started</h3>
           <p class="text-gray-600">We discuss your idea and requirements.</p>
           <p class="mt-4 text-sm text-gray-400 italic">Free</p>
         </div>
-        <div class="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+        <div class="js-step bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl cursor-pointer" data-step="Initial Design & Prototype">
           <div class="text-blue-600 text-3xl font-bold mb-2">2</div>
           <h3 class="text-2xl font-semibold mb-2">Initial Design & Prototype</h3>
           <p class="text-gray-600">See what your app/website could look like.</p>
           <p class="mt-4 text-sm text-gray-400 italic">Free</p>
         </div>
-        <div class="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+        <div class="js-step bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl cursor-pointer" data-step="Development">
           <div class="text-blue-600 text-3xl font-bold mb-2">3</div>
           <h3 class="text-2xl font-semibold mb-2">Development</h3>
           <p class="text-gray-600">Fast, cost-effective builds leveraging AI automation.</p>
           <p class="mt-4 text-sm text-gray-400 italic">Fixed cost</p>
         </div>
-        <div class="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+        <div class="js-step bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl cursor-pointer" data-step="Launch & Support">
           <div class="text-blue-600 text-3xl font-bold mb-2">4</div>
           <h3 class="text-2xl font-semibold mb-2">Launch & Support</h3>
           <p class="text-gray-600">We deploy and provide ongoing maintenance.</p>
@@ -98,6 +98,14 @@
   <footer class="container mx-auto px-6 py-6 text-center text-gray-600">
     &copy; 2025 App Business. All rights reserved.
   </footer>
+  <!-- Tile Info Modal -->
+  <div id="tile-info-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 max-w-lg w-full relative">
+      <button id="tile-info-close" class="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-2xl">&times;</button>
+      <h2 id="tile-info-title" class="text-2xl font-bold mb-4"></h2>
+      <div id="tile-info-content" class="text-gray-700"></div>
+    </div>
+  </div>
   <!-- Main JS bundle -->
   <script type="module" src="/src/main.js"></script>
 </body>
