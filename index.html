@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>App Business - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Smooth scrolling */
+    html { scroll-behavior: smooth; }
+    /* Floating animation */
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+  </style>
+</head>
+<body class="antialiased text-gray-900 bg-white">
+  <nav class="bg-white/50 backdrop-blur-md sticky top-0 z-50 w-full">
+    <div class="container mx-auto p-6 flex justify-between items-center">
+      <a href="index.html" class="text-xl font-bold">App Business</a>
+      <div>
+        <a href="index.html" class="text-gray-600 hover:text-gray-900 mx-4 transition-all duration-200 hover:underline hover:underline-offset-4 hover:decoration-blue-600">Home</a>
+        <a href="portfolio.html" class="text-gray-600 hover:text-gray-900 mx-4 transition-all duration-200 hover:underline hover:underline-offset-4 hover:decoration-blue-600">Portfolio</a>
+        <a href="#" class="js-get-started text-gray-600 hover:text-gray-900 mx-4 transition-all duration-200 hover:underline hover:underline-offset-4 hover:decoration-blue-600">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="w-full px-6 py-20 text-center">
+    <h1 class="text-5xl font-bold mb-4 animate-float">Onboard in One Click</h1>
+    <p class="text-xl text-gray-700 mb-8">Start your custom app or website journey with AI-driven, low-cost development.</p>
+    <a href="#" class="js-get-started bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 active:scale-95">Get Started</a>
+  </header>
+
+  <!-- Your Project Section -->
+  <section id="your-project" class="bg-gray-100 py-20">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12">Your Project</h2>
+      <p class="text-center text-gray-700 mb-8">We build all kinds of digital products to bring your ideas to life.</p>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+          <div class="text-blue-600 text-3xl font-bold mb-2">Web Pages</div>
+          <p class="text-gray-600">Responsive, SEO-friendly websites.</p>
+        </div>
+        <div class="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+          <div class="text-blue-600 text-3xl font-bold mb-2">Mobile Apps</div>
+          <p class="text-gray-600">iOS & Android apps with native-like performance.</p>
+        </div>
+        <div class="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+          <div class="text-blue-600 text-3xl font-bold mb-2">Web Applications</div>
+          <p class="text-gray-600">Full-featured web apps that scale with your needs.</p>
+        </div>
+        <div class="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+          <div class="text-blue-600 text-3xl font-bold mb-2">Custom Integrations</div>
+          <p class="text-gray-600">APIs, CRM integrations, chatbots & more.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-6 py-20 text-center">
+    <h2 class="text-4xl font-bold mb-4">High Quality. Low Cost.</h2>
+    <p class="text-xl text-gray-700 mb-8">Utilizing AI to streamline development and reduce costs without sacrificing quality.</p>
+  </section>
+
+  <section id="process" class="bg-gray-100 py-20">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12">Our 4-Step Process</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+          <div class="text-blue-600 text-3xl font-bold mb-2">1</div>
+          <h3 class="text-2xl font-semibold mb-2">Consultation</h3>
+          <p class="text-gray-600">We discuss your app idea and requirements.</p>
+          <p class="mt-4 text-sm text-gray-400 italic">Free</p>
+        </div>
+        <div class="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+          <div class="text-blue-600 text-3xl font-bold mb-2">2</div>
+          <h3 class="text-2xl font-semibold mb-2">Design & Prototype</h3>
+          <p class="text-gray-600">UX/UI mockups created rapidly with AI insights.</p>
+          <p class="mt-4 text-sm text-gray-400 italic">Tranche 1</p>
+        </div>
+        <div class="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+          <div class="text-blue-600 text-3xl font-bold mb-2">3</div>
+          <h3 class="text-2xl font-semibold mb-2">Development</h3>
+          <p class="text-gray-600">Fast, cost-effective builds leveraging AI automation.</p>
+          <p class="mt-4 text-sm text-gray-400 italic">Tranche 2</p>
+        </div>
+        <div class="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+          <div class="text-blue-600 text-3xl font-bold mb-2">4</div>
+          <h3 class="text-2xl font-semibold mb-2">Launch & Support</h3>
+          <p class="text-gray-600">We deploy and provide ongoing maintenance.</p>
+          <p class="mt-4 text-sm text-gray-400 italic">Small ongoing cost</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer class="container mx-auto px-6 py-6 text-center text-gray-600">
+    &copy; 2025 App Business. All rights reserved.
+  </footer>
+</body>
+</html>
