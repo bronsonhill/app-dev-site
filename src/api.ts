@@ -20,13 +20,28 @@ export async function submitAnswers(answers: Record<string, any>): Promise<void>
   }
 }
 
+/**
+ * Submit contact form details to the backend (Submit-Contact Netlify function)
+ */
+export async function submitContact(contact: { name: string; email: string; phone: string; }): Promise<void> {
+  const res = await fetch('/.netlify/functions/submit-contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(contact)
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || res.statusText);
+  }
+}
+
 // ----- OpenAI interactions -----
 interface AIResponse {
   summary?: any;
   content?: string;
 }
 
-async function callOpenAI(input: any[], tools?: any[], tool_choice?: string, model = 'gpt-4.1'): Promise<AIResponse> {
+async function callOpenAI(input: any[], tools?: any[], tool_choice?: string, model = 'gpt-4o'): Promise<AIResponse> {
   const body: any = { input, model };
   if (tools) body.tools = tools;
   if (tool_choice) body.tool_choice = tool_choice;
@@ -35,8 +50,10 @@ async function callOpenAI(input: any[], tools?: any[], tool_choice?: string, mod
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   });
+  console.log('OpenAI API response:', res);
   if (!res.ok) {
     const text = await res.text();
+    console.error('OpenAI API error:', text);
     throw new Error(`OpenAI API Error: ${text}`);
   }
   const data = await res.json();
@@ -61,11 +78,11 @@ const ASK_CLARIFICATION_TOOL = {
 };
 
 /**
- * Ask a clarifying question using the OpenAI clarification tool.
- * @param messages Complete conversation messages for clarity
+ * Unified call: attaches both clarification and summary tools, auto tool choice
+ * @param messages Conversation messages for tool calls
  */
-export async function askClarification(messages: any[]): Promise<AIResponse> {
-  return callOpenAI(messages, [ASK_CLARIFICATION_TOOL], 'auto');
+export async function callTools(messages: any[]): Promise<AIResponse> {
+  return callOpenAI(messages, [ASK_CLARIFICATION_TOOL, GENERATE_SUMMARY_TOOL], 'auto');
 }
 
 // Summary generation tool definition
@@ -89,10 +106,4 @@ const GENERATE_SUMMARY_TOOL = {
   }
 };
 
-/**
- * Generate the project summary using the OpenAI summary tool.
- * @param messages Q&A messages including system prompt
- */
-export async function generateSummary(messages: any[]): Promise<AIResponse> {
-  return callOpenAI(messages, [GENERATE_SUMMARY_TOOL], 'auto');
-}
+// Note: use callTools for unified interaction (both tools attached)

@@ -32,7 +32,17 @@ export const QUESTIONS = [
     example: answers => answers.userRole === 'Business'
       ? 'E.g. We help people track their daily habits and improve productivity.'
       : 'E.g. I want to track my fitness goals and progress.',
-    skipOption: false
+    skipOption: false,
+    // Skip prompt when the personal goal is implicit in clear templates
+    condition: answers => {
+      if (answers.userRole === 'Individual' && answers['project Type'] === 'Website') {
+        const skipList = ['Resume Site', 'Portfolio', 'Hobby Site'];
+        if (skipList.includes(answers.subType)) {
+          return false;
+        }
+      }
+      return true;
+    }
   },
   {
     key: 'platforms',
@@ -55,6 +65,24 @@ export const QUESTIONS = [
         return `E.g. ${subtype} customers aged 25-40`;
       }
       return `E.g. Individuals interested in ${subtype}`;
+    },
+    // Skip asking for obvious personal or internal use cases
+    condition: answers => {
+      const role = answers.userRole;
+      const project = answers['project Type'];
+      const subtype = answers.subType;
+      // Individuals personal sites where users are implicit
+      if (role === 'Individual' && project === 'Website') {
+        const skipList = ['Resume Site', 'Portfolio', 'Hobby Site'];
+        if (skipList.includes(subtype)) {
+          return false;
+        }
+      }
+      // Business internal tools target internal users implicitly
+      if (role === 'Business' && project === 'Mobile App' && subtype === 'Internal Tools') {
+        return false;
+      }
+      return true;
     }
   },
   {
